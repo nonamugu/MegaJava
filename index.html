@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게임 취향 설문</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>게임 취향 설문</h1>
+    <button id="start-button" onclick="startSurvey()">시작하기</button>
+    <form id="survey-form" style="display: none;">
+      <div id="question-container" class="question-container">
+        <!-- 여기에 질문을 동적으로 생성하는 스크립트에서 추가될 내용이 들어갑니다 -->
+      </div>
+      <div id="result" class="question" style="display: none;">
+        <h2>결과</h2>
+        <p id="result-text">결과가 표시될 곳입니다.</p>
+      </div>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
