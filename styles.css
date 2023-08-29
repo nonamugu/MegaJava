@@ -1,16 +1,151 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    font-family: 'Gaegu', cursive;
+    background: #2ecc71;
     margin: 0;
     padding: 0;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+.range {
+  --p: 0; /* 초기 값 설정 */
+  display: none;
+  width: 450px;
+  height: 20px;
+  margin: auto;
+  background: #eee;
+  border-radius: 8px;
+  position: relative;
+  margin-top: 20px;
+}
+
+.range__label {
+  position: absolute;
+  top: 50%;
+  left: var(--p);
+  transform: translate(-50%, -50%);
+  color: #BA55D3;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.range::before {
+  content: "";
+  position: absolute;
+  width: var(--p);
+  height: 100%;
+  background: #FFADC5;
+  border-radius: 8px;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.range.fadeOut {
+  animation: fadeOut;
+}
+
+label, 
+input {
+  margin-top: 30px;
+  margin-left: 40px;
+  font-size: 1.7em;
+  font-weight: bold;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    height: 100vh; /* 뷰포트 높이의 100%로 설정 */
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#explanation {
+  font-family: 'Gaegu', cursive;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left;
+}
+
+#quest {
+  font-size: 2.3em;
+  font-weight: bold;
+  color: #FFADC5;
+  text-align: center;
+  padding: 60px;
+  margin-top: 20px;
+}
+
+button,
+button::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+button {
+  background: none;
+  border: 3px solid #2ecc71;
+  border-radius: 5px;
+  color: #2ecc71;
+  display: block;
+  font-size: 1.6em;
+  font-weight: bold;
+  margin: 1em auto;
+  padding: 2em 6em;
+  position: relative;
+  text-transform: uppercase;
+}
+
+button::before,
+button::after {
+  background: #2ecc71;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+button:hover {
+  color: #fff;
+  background-color: #2ecc71;
+}
+
+/* 시작버튼 */
+#start-button {
+  position: fixed;
+  padding: 2em 4em;
+  bottom: 0px;
+}
+
+#start-button::after {
+  height: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+#start-button:hover:after {
+  height: 100%;
+}
+
+/* 다음버튼 */
+#next {
+  margin: 1em auto;
+  margin-top: 55px;
+  margin-left: 70px;
+  padding: 0.7em 2em;
+  position: absolute;
 }
 
 h1 {

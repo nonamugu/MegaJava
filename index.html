@@ -5,19 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>게임 취향 설문</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Gaegu:300" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1>게임 취향 설문</h1>
+    <h1>게임 취향 테스트 🎮</h1>
+    <pre id="explanation">
+      <br>
+      야 너두 게임할 수 있어!
+
+      유튜브도.. 넷플릭스도.. 볼만한게 없고 집에서 할게 없을 때 😞
+      심심해서 게임을 찾아봐도 뭐가 나한테 재미있는지 모를 때 😕
+
+      그럴 땐 게임 취향 테스트로 나의 게임 성향을 알아볼까? 😝
+    </pre>
+    <div class="range" style="--p:60">
+      <div class="range__label">Progress</div>
+    </div>
     <button id="start-button" onclick="startSurvey()">시작하기</button>
     <form id="survey-form" style="display: none;">
       <div id="question-container" class="question-container">
-        <!-- 여기에 질문을 동적으로 생성하는 스크립트에서 추가될 내용이 들어갑니다 -->
+        
       </div>
-      <div id="result" class="question" style="display: none;">
+      <!-- <div id="result" class="question" style="display: none;">
         <h2>결과</h2>
         <p id="result-text">결과가 표시될 곳입니다.</p>
-      </div>
+      </div> -->
     </form>
   </div>
   <script src="script.js"></script>

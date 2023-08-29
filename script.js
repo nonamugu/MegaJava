@@ -1,4 +1,6 @@
 const startButton = document.getElementById('start-button');
+const explanation = document.getElementById('explanation');
+const progressBar = document.querySelector('.range')
 const surveyForm = document.getElementById('survey-form');
 const questionContainer = document.getElementById('question-container');
 const resultPage = document.getElementById('result');
@@ -115,11 +117,6 @@ function saveAnswer(questionId, answer) {
   }
 }
 
-function toggleNextButton(enabled) {
-  const nextButton = document.querySelector('.question-container button');
-  nextButton.disabled = !enabled;
-}
-
 // 특정 id의 질문 가져오는 함수
 function getQuestionById(id) {
   return questions.find(question => question.id === id);
@@ -127,6 +124,8 @@ function getQuestionById(id) {
 
 function startSurvey() {
   startButton.style.display = 'none';
+  explanation.style.display = 'none';
+  progressBar.style.display = 'block';
   surveyForm.style.display = 'block';
 
   // 메인 페이지에서 첫 번째 질문 보여주기
@@ -135,20 +134,22 @@ function startSurvey() {
 
 function renderQuestion(questionIndex) {
   const question = questions[questionIndex];
+  const percentage = (questionIndex) / questions.length * 100;
+  
   questionContainer.innerHTML = `
     <div class="question">
-      <p>${question.text}</p>
-      ${question.choices.map(choice => `<label><input type="radio" name="answer" value="${choice.text}"> ${choice.text}</label>`).join('')}
-      <button type="button" onclick="nextQuestion()">다음</button>
+      <p id="quest">${question.text}</p>
+      ${question.choices.map(choice => `<label><input type="radio" name="answer" value="${choice.text}"> ${choice.text}<br></label>`).join('')}
+      <button id="next" type="button" onclick="nextQuestion()">다음</button>
     </div>
   `;
-
-  toggleNextButton(false);
+  
+  progressBar.style.setProperty('--p', `${percentage}%`);
+  progressBar.querySelector('.range__label').textContent = `${Math.round(percentage)}%`;
 
   const answerInputs = document.querySelectorAll('input[name="answer"]');
   answerInputs.forEach(input => {
     input.addEventListener('change', () => {
-      toggleNextButton(true);
     });
   });
 }
@@ -160,30 +161,34 @@ function nextQuestion() {
   if (selectedAnswer) {
     const questionId = currentQuestion.id;
     const answer = selectedAnswer.value;
+
     saveAnswer(questionId, answer);
 
     currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
+    if (currentQuestionIndex < questions.length) { 
+      
       renderQuestion(currentQuestionIndex);
     } else {
       questionContainer.style.display = 'none';
-      calculateResult();
+      progressBar.style.setProperty('--p', "100%");
+      progressBar.querySelector('.range__label').textContent = "100%";  
+      console.log("사용자의 답변:");
+      console.log(userAnswers);
+      
+      animateProgressBarOut();
     }
   } else {
     alert('답변을 선택해주세요.');
   }
 }
 
-function calculateResult() {
-  // 사용자의 답변 콘솔로 출력
-  console.log("사용자의 답변:");
-  console.log(userAnswers);
+function animateProgressBarOut() {
+  const progressBarAnimationDuration = 2000;
+  const progressBar = document.querySelector('.range');
+  progressBar.style.animation = `fadeOut ${progressBarAnimationDuration}ms`;
 
-  // 여기에 결과 계산 로직 추가
-  const resultText = "결과가 여기에 표시됩니다.";
-  document.getElementById('result-text').textContent = resultText;
-  resultPage.style.display = 'block';
+  setTimeout(() => {
+    progressBar.style.display = 'none';
+    progressBar.style.animation = '';
+  }, progressBarAnimationDuration);
 }
-
-// 메인 페이지에서 첫 번째 질문 보여주기
-startSurvey();
