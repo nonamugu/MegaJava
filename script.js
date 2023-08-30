@@ -175,7 +175,9 @@ function nextQuestion() {
       console.log("사용자의 답변:");
       console.log(userAnswers);
       
-      animateProgressBarOut();
+      animateProgressBarOut(() => {
+        progressBar.style.display = 'none';
+      });
     }
   } else {
     alert('답변을 선택해주세요.');
@@ -188,7 +190,12 @@ function animateProgressBarOut() {
   progressBar.style.animation = `fadeOut ${progressBarAnimationDuration}ms`;
 
   setTimeout(() => {
-    progressBar.style.display = 'none';
     progressBar.style.animation = '';
+    goToResultPage();
   }, progressBarAnimationDuration);
 }
+
+function goToResultPage() {
+  window.location.href = 'result.html'
+}
+
